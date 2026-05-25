@@ -1,0 +1,10 @@
+{
+  "geometry_shape": "梯形",
+  "dam_height": 30,
+  "top_width": 8,
+  "bottom_width": null,
+  "upstream_slope_angle": 60,
+  "downstream_slope_angle": 45,
+  "upstream_total_head": 25,
+  "downstream_total_head": 5
+}

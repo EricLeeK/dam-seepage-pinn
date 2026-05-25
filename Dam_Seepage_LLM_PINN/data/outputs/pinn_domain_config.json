@@ -1,0 +1,27 @@
+{
+    "status": "success",
+    "precision_data": null,
+    "check_report": "视觉复核无误且几何逻辑完美，坐标已生成。",
+    "pinn_domain": {
+        "vertices": [
+            [
+                0.0,
+                0.0
+            ],
+            [
+                55.3205,
+                0.0
+            ],
+            [
+                17.3205,
+                30.0
+            ],
+            [
+                25.3205,
+                30.0
+            ]
+        ],
+        "upstream_head": 25.0,
+        "downstream_head": 5.0
+    }
+}
