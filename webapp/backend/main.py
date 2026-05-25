@@ -10,6 +10,9 @@ from pathlib import Path
 from datetime import datetime
 from typing import Optional
 
+from dotenv import load_dotenv
+load_dotenv(Path(__file__).resolve().parent.parent.parent / ".env")
+
 from fastapi import FastAPI, UploadFile, File, Form, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
@@ -187,8 +190,8 @@ async def agent_analyze(
     Upload a dam sketch image, run Agent 1 + Agent 2 pipeline.
     Returns extracted parameters and validation report.
     """
-    # ── API key handling: request body → env var → 400 error ──
-    resolved_key = api_key or os.environ.get("GEMINI_API_KEY") or os.environ.get("OPENAI_API_KEY")
+    # ── API key handling: request body → .env → 400 error ──
+    resolved_key = api_key or os.environ.get("GEMINI_API_KEY", "").strip()
     if not resolved_key:
         return JSONResponse(
             status_code=400,

@@ -94,7 +94,9 @@ def run_vision_extraction(api_key: str, image_name: str, image_path: str = None)
 
 # 如果单独运行此脚本用于测试
 if __name__ == "__main__":
-    TEST_API_KEY = "AIzaSyBochPcAFh108fe0QS7MwyICtKR9wzlftk"
+    from dotenv import load_dotenv
+    load_dotenv()
+    TEST_API_KEY = os.environ.get("GEMINI_API_KEY", "")
     TEST_IMAGE = "dam_sketch.jpg"
     try:
         run_vision_extraction(TEST_API_KEY, TEST_IMAGE)

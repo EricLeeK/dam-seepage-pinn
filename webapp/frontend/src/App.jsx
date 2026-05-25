@@ -143,7 +143,7 @@ function App() {
     setAgentResult(null);
     const fd = new FormData();
     fd.append('file', sketchFile);
-    fd.append('api_key', prompt('请输入 Gemini API Key:') || '');
+    // API key is read from .env on the backend
     try {
       const data = await apiUpload('/agent/analyze', fd);
       setAgentResult(data);

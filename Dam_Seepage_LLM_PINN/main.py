@@ -1,5 +1,8 @@
 import os
 import sys
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # 确保 Python 解释器能找到 src 目录下的包
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))

@@ -25,9 +25,9 @@ dist/
 .DS_Store
 Thumbs.db
 
-# Environment / Secrets
+# Environment / Secrets (keep .env.example)
 .env
-.env.*
+.env.local
 *.pem
 *.key
 

@@ -136,6 +136,8 @@ def run_physics_validation(api_key: str, image_name: str, image_path: str = None
     return final_result
 
 if __name__ == "__main__":
-    MY_KEY = "AIzaSyBochPcAFh108fe0QS7MwyICtKR9wzlftk"
+    from dotenv import load_dotenv
+    load_dotenv()
+    MY_KEY = os.environ.get("GEMINI_API_KEY", "")
     TEST_IMAGE = "dam_sketch.jpg"
     run_physics_validation(MY_KEY, TEST_IMAGE)
