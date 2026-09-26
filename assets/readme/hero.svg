@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" role="img" aria-labelledby="title desc">
+  <title id="title">大坝渗流 PINN</title>
+  <desc id="desc">从交互绘图或草图识别出发，建立大坝几何并求解渗流场。 The diagram is a conceptual illustration, not a benchmark or application screenshot.</desc>
+  <defs>
+    <clipPath id="frame">
+      <rect width="1200" height="440" rx="24" />
+    </clipPath>
+  </defs>
+  <g clip-path="url(#frame)">
+    <rect x="0" y="0" width="1200" height="440" rx="24" fill="#e9f3f3" />
+    <text x="60" y="72" font-family="'SFMono-Regular',Menlo,monospace" font-size="18" font-weight="600" fill="#267f8c" text-anchor="start">GEOMETRY → PHYSICS → SOLUTION</text>
+    <text x="60" y="166" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif" font-size="68" font-weight="700" fill="#173d4b" text-anchor="start">大坝渗流</text>
+    <text x="60" y="238" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif" font-size="68" font-weight="700" fill="#173d4b" text-anchor="start">PINN</text>
+    <text x="60" y="292" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif" font-size="26" font-weight="400" fill="#173d4b" text-anchor="start">交互绘图 · 草图识别</text>
+    <text x="60" y="327" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif" font-size="26" font-weight="400" fill="#173d4b" text-anchor="start">物理约束下的渗流求解</text>
+    <text x="60" y="400" font-family="'SFMono-Regular',Menlo,monospace" font-size="18" font-weight="600" fill="#267f8c" text-anchor="start">MULTI-AGENT INPUT  /  PINN SOLVER</text>
+    <path d="M640 327H1150" fill="none" stroke="#719fa8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M686 327L848 105H946L1114 327Z" fill="#d1dcd7" stroke="#32596a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="638" y="168" width="134" height="159" rx="0" fill="#97d1db" />
+    <text x="638" y="148" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif" font-size="24" font-weight="500" fill="#267f8c" text-anchor="start">上游</text>
+    <text x="1070" y="369" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif" font-size="24" font-weight="500" fill="#267f8c" text-anchor="start">下游</text>
+    <text x="784" y="70" font-family="'SFMono-Regular',Menlo,monospace" font-size="18" font-weight="600" fill="#517780" text-anchor="start">CROSS-SECTION / SCHEMATIC</text>
+    <g id="seepage-0">
+      <path d="M745 213 C849 210 958 263 1093 307" fill="none" stroke="#267f8c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+    <g id="seepage-1">
+      <path d="M745 246 C849 234 958 280 1093 313" fill="none" stroke="#267f8c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+    <g id="seepage-2">
+      <path d="M745 279 C849 258 958 297 1093 319" fill="none" stroke="#267f8c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+  </g>
+</svg>

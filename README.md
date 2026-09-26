@@ -1,6 +1,18 @@
+<p align="center">
+  <img src="./assets/readme/hero.gif" width="100%" alt="从交互绘图或草图识别出发，建立大坝几何并求解渗流场。 Conceptual overview.">
+</p>
+
 # 基于多智能体与 PINN 的大坝渗流自动求解系统
 
 基于物理信息神经网络 (PINN) 的大坝渗流场自动求解 Web 应用，支持交互绘图和草图智能识别两种输入模式。
+
+## 使用流程
+
+1. **定义几何**：在画布中绘制，或通过草图识别提取几何信息。
+2. **设置物理问题**：检查几何与边界信息，进入 PINN 求解。
+3. **查看结果**：等待训练并查看渗流场可视化。
+
+头图展示的是坝体剖面与渗流路径示意，具体结果由输入条件与训练过程决定。
 
 ## 环境要求
 
@@ -101,3 +113,10 @@ A: 修改 `start.sh` / `start.bat` 中的 `BACKEND_PORT` 和 `FRONTEND_PORT`。
 
 **Q: 没有 GPU 能用吗？**
 A: 可以，系统会自动使用 CPU 训练，只是速度较慢。
+
+<details>
+<summary>Static overview</summary>
+
+[Open the static SVG](./assets/readme/hero.svg).
+
+</details>
