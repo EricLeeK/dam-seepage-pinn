@@ -1,33 +1,288 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" role="img" aria-labelledby="title desc">
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
   <title id="title">大坝渗流 PINN</title>
-  <desc id="desc">从交互绘图或草图识别出发，建立大坝几何并求解渗流场。 The diagram is a conceptual illustration, not a benchmark or application screenshot.</desc>
+  <desc id="desc">从几何与上下游边界到 PINN 求解的坝体剖面示意。流向为机制说明，不是数值模拟结果。</desc>
   <defs>
-    <clipPath id="frame">
-      <rect width="1200" height="440" rx="24" />
+    <clipPath id="dam-shape">
+      <path d="M205 482 L555 238 L645 238 L1004 482 Z" />
+    </clipPath>
+    <linearGradient id="soil" x1="0" y1="0" x2="0.9" y2="0.8">
+      <stop stop-color="#E3CEAB" />
+      <stop offset="1" stop-color="#C6CDB6" />
+    </linearGradient>
+    <pattern id="ground" width="16" height="12" patternUnits="userSpaceOnUse">
+      <path d="M0 12 L12 0" fill="none" stroke="#A5B3A6" stroke-width="1" />
+    </pattern>
+    <marker id="flow-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0 1 L6 4 L0 7" fill="none" stroke="#267D89" stroke-width="1.5" />
+    </marker>
+    <clipPath id="canvas">
+      <rect width="1200" height="620" rx="26" />
     </clipPath>
   </defs>
-  <g clip-path="url(#frame)">
-    <rect x="0" y="0" width="1200" height="440" rx="24" fill="#e9f3f3" />
-    <text x="60" y="72" font-family="'SFMono-Regular',Menlo,monospace" font-size="18" font-weight="600" fill="#267f8c" text-anchor="start">GEOMETRY → PHYSICS → SOLUTION</text>
-    <text x="60" y="166" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif" font-size="68" font-weight="700" fill="#173d4b" text-anchor="start">大坝渗流</text>
-    <text x="60" y="238" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif" font-size="68" font-weight="700" fill="#173d4b" text-anchor="start">PINN</text>
-    <text x="60" y="292" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif" font-size="26" font-weight="400" fill="#173d4b" text-anchor="start">交互绘图 · 草图识别</text>
-    <text x="60" y="327" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif" font-size="26" font-weight="400" fill="#173d4b" text-anchor="start">物理约束下的渗流求解</text>
-    <text x="60" y="400" font-family="'SFMono-Regular',Menlo,monospace" font-size="18" font-weight="600" fill="#267f8c" text-anchor="start">MULTI-AGENT INPUT  /  PINN SOLVER</text>
-    <path d="M640 327H1150" fill="none" stroke="#719fa8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M686 327L848 105H946L1114 327Z" fill="#d1dcd7" stroke="#32596a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-    <rect x="638" y="168" width="134" height="159" rx="0" fill="#97d1db" />
-    <text x="638" y="148" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif" font-size="24" font-weight="500" fill="#267f8c" text-anchor="start">上游</text>
-    <text x="1070" y="369" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif" font-size="24" font-weight="500" fill="#267f8c" text-anchor="start">下游</text>
-    <text x="784" y="70" font-family="'SFMono-Regular',Menlo,monospace" font-size="18" font-weight="600" fill="#517780" text-anchor="start">CROSS-SECTION / SCHEMATIC</text>
-    <g id="seepage-0">
-      <path d="M745 213 C849 210 958 263 1093 307" fill="none" stroke="#267f8c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  <g clip-path="url(#canvas)">
+    <rect x="0" y="0" width="1200" height="620" rx="0" fill="#EFF3EB" />
+    <text x="50" y="44" font-family="Menlo, Consolas, monospace" font-size="18" font-weight="600" fill="#267D89">GEOMETRY  →  PHYSICS  →  SEEPAGE</text>
+    <text x="49" y="112" font-family="-apple-system, BlinkMacSystemFont, PingFang SC, Hiragino Sans, sans-serif" font-size="60" font-weight="650" fill="#183C40">大坝渗流 PINN</text>
+    <text x="52" y="158" font-family="-apple-system, BlinkMacSystemFont, PingFang SC, Hiragino Sans, sans-serif" font-size="27" font-weight="400" fill="#4A6260">从坝体草图，到物理约束下的渗流场。</text>
+    <path d="M827 43 H1146 M827 183 H1146" fill="none" stroke="#A8B5A9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="838" y="77" font-family="Menlo, Consolas, monospace" font-size="17" font-weight="600" fill="#B06C3D">PHYSICS NOTE</text>
+    <text x="838" y="116" font-family="Georgia, Songti SC, serif" font-size="32" font-weight="400" fill="#183C40">∇²H = 0</text>
+    <text x="838" y="158" font-family="Georgia, Songti SC, serif" font-size="30" font-weight="400" fill="#183C40">q = −k ∇H</text>
+    <rect x="55" y="483" width="1090" height="17" rx="0" fill="url(#ground)" />
+    <path d="M55 483 H1145" fill="none" stroke="#183C40" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M60 318 H440 L205 482 H60 Z" fill="#A8CFCC" />
+    <path d="M953 447 H1140 V482 H1004 Z" fill="#BFD9D2" />
+    <path d="M73 339 H392.1" fill="none" stroke="#72AAA9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity=".52" />
+    <path d="M73 362 H359.1" fill="none" stroke="#72AAA9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity=".52" />
+    <path d="M73 385 H326.1" fill="none" stroke="#72AAA9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity=".52" />
+    <path d="M73 408 H293.1" fill="none" stroke="#72AAA9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity=".52" />
+    <path d="M73 431 H260.2" fill="none" stroke="#72AAA9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity=".52" />
+    <path d="M73 454 H227.2" fill="none" stroke="#72AAA9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity=".52" />
+    <path d="M60 318 H440" fill="none" stroke="#267D89" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M953 447 H1140" fill="none" stroke="#267D89" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M205 482 L555 238 L645 238 L1004 482 Z" fill="url(#soil)" stroke="#183C40" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M555 238 H645" fill="none" stroke="#183C40" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+    <g clip-path="url(#dam-shape)">
+      <circle cx="230" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="261" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="292" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="323" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="354" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="385" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="416" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="447" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="478" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="509" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="540" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="571" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="602" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="633" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="664" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="695" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="726" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="757" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="788" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="819" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="850" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="881" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="912" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="943" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="974" cy="267" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="230" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="261" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="292" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="323" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="354" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="385" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="416" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="447" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="478" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="509" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="540" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="571" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="602" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="633" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="664" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="695" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="726" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="757" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="788" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="819" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="850" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="881" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="912" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="943" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="974" cy="295" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="230" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="261" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="292" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="323" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="354" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="385" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="416" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="447" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="478" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="509" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="540" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="571" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="602" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="633" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="664" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="695" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="726" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="757" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="788" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="819" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="850" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="881" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="912" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="943" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="974" cy="323" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="230" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="261" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="292" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="323" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="354" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="385" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="416" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="447" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="478" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="509" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="540" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="571" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="602" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="633" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="664" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="695" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="726" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="757" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="788" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="819" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="850" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="881" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="912" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="943" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="974" cy="351" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="230" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="261" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="292" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="323" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="354" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="385" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="416" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="447" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="478" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="509" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="540" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="571" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="602" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="633" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="664" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="695" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="726" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="757" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="788" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="819" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="850" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="881" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="912" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="943" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="974" cy="379" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="230" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="261" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="292" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="323" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="354" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="385" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="416" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="447" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="478" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="509" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="540" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="571" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="602" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="633" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="664" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="695" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="726" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="757" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="788" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="819" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="850" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="881" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="912" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="943" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="974" cy="407" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="230" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="261" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="292" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="323" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="354" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="385" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="416" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="447" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="478" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="509" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="540" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="571" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="602" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="633" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="664" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="695" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="726" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="757" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="788" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="819" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="850" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="881" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="912" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="943" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="974" cy="435" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="230" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="261" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="292" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="323" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="354" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="385" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="416" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="447" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="478" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="509" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="540" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="571" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="602" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="633" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="664" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="695" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="726" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="757" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="788" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="819" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="850" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="881" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="912" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="943" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
+      <circle cx="974" cy="463" r="1.7" fill="#5C7769" opacity=".4" />
     </g>
-    <g id="seepage-1">
-      <path d="M745 246 C849 234 958 280 1093 313" fill="none" stroke="#267f8c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M426 341 C551 332 664 354 866 423" fill="none" stroke="#9AAB97" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M378 382 C520 369 696 393 913 446" fill="none" stroke="#9AAB97" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M320 426 C502 412 693 425 930 466" fill="none" stroke="#9AAB97" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M440 318 C577 317 740 369 941 439" fill="none" stroke="#B06C3D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="9 7" />
+    <text x="91" y="298" font-family="-apple-system, BlinkMacSystemFont, PingFang SC, Hiragino Sans, sans-serif" font-size="23" font-weight="600" fill="#267D89">上游水头</text>
+    <text x="1016" y="428" font-family="-apple-system, BlinkMacSystemFont, PingFang SC, Hiragino Sans, sans-serif" font-size="22" font-weight="600" fill="#267D89">下游水头</text>
+    <path d="M600 219 V194 H720" fill="none" stroke="#768E7E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="595" y="209" font-family="-apple-system, BlinkMacSystemFont, PingFang SC, Hiragino Sans, sans-serif" font-size="18" font-weight="400" fill="#183C40" />
+    <text x="573" y="183" font-family="-apple-system, BlinkMacSystemFont, PingFang SC, Hiragino Sans, sans-serif" font-size="21" font-weight="400" fill="#4A6260">坝体几何</text>
+    <text x="547" y="275" font-family="-apple-system, BlinkMacSystemFont, PingFang SC, Hiragino Sans, sans-serif" font-size="22" font-weight="500" fill="#355953">PINN 配点</text>
+    <text x="510" y="305" font-family="-apple-system, BlinkMacSystemFont, PingFang SC, Hiragino Sans, sans-serif" font-size="20" font-weight="400" fill="#496B60">边界约束 · 自动微分</text>
+    <path d="M212 510 H996" fill="none" stroke="#768E7E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M212 504 V516 M996 504 V516" fill="none" stroke="#768E7E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="471" y="500" width="267" height="31" rx="0" fill="#EFF3EB" />
+    <text x="604" y="521" font-family="-apple-system, BlinkMacSystemFont, PingFang SC, Hiragino Sans, sans-serif" font-size="20" font-weight="400" fill="#50665D" text-anchor="middle">不透水基底  ∂H/∂n = 0</text>
+    <text x="51" y="578" font-family="-apple-system, BlinkMacSystemFont, PingFang SC, Hiragino Sans, sans-serif" font-size="26" font-weight="600" fill="#183C40">画几何</text>
+    <path d="M157 569 H242 M232 562 L242 569 L232 576" fill="none" stroke="#267D89" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="265" y="578" font-family="-apple-system, BlinkMacSystemFont, PingFang SC, Hiragino Sans, sans-serif" font-size="26" font-weight="600" fill="#183C40">定边界</text>
+    <path d="M371 569 H456 M446 562 L456 569 L446 576" fill="none" stroke="#267D89" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="479" y="578" font-family="-apple-system, BlinkMacSystemFont, PingFang SC, Hiragino Sans, sans-serif" font-size="26" font-weight="600" fill="#183C40">训练求解</text>
+    <text x="1144" y="576" font-family="-apple-system, BlinkMacSystemFont, PingFang SC, Hiragino Sans, sans-serif" font-size="19" font-weight="400" fill="#6B7D72" text-anchor="end">机制示意 · 非数值结果</text>
+    <g id="flow-1">
+      <path d="M426 341 C551 332 664 354 866 423" fill="none" stroke="#267D89" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      <g transform="translate(866 423) rotate(19)">
+        <path d="M-11 -5 L0 0 L-11 5" fill="none" stroke="#267D89" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
     </g>
-    <g id="seepage-2">
-      <path d="M745 279 C849 258 958 297 1093 319" fill="none" stroke="#267f8c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+    <g id="flow-2">
+      <path d="M378 382 C520 369 696 393 913 446" fill="none" stroke="#267D89" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      <g transform="translate(913 446) rotate(14)">
+        <path d="M-11 -5 L0 0 L-11 5" fill="none" stroke="#267D89" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
+    <g id="flow-3">
+      <path d="M320 426 C502 412 693 425 930 466" fill="none" stroke="#267D89" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      <g transform="translate(930 466) rotate(10)">
+        <path d="M-11 -5 L0 0 L-11 5" fill="none" stroke="#267D89" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
     </g>
   </g>
 </svg>

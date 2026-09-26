@@ -1,10 +1,27 @@
 <p align="center">
-  <img src="./assets/readme/hero.gif" width="100%" alt="从交互绘图或草图识别出发，建立大坝几何并求解渗流场。 Conceptual overview.">
+  <img src="./assets/readme/hero.gif" width="100%" alt="从几何与上下游边界到 PINN 求解的坝体剖面示意。流向为机制说明，不是数值模拟结果。">
 </p>
 
 # 基于多智能体与 PINN 的大坝渗流自动求解系统
 
 基于物理信息神经网络 (PINN) 的大坝渗流场自动求解 Web 应用，支持交互绘图和草图智能识别两种输入模式。
+
+## 仓库中的示例材料
+
+<details>
+<summary>查看输入草图与已保存的结果图</summary>
+
+**输入草图示例：上游 22 m、下游 5 m。**
+
+<img src="./Dam_Seepage_LLM_PINN/data/inputs/dam_sketch1.jpg" width="100%" alt="仓库中的坝体草图输入示例，上游水位 22 米、下游水位 5 米。">
+
+**另一算例的已保存输出：上游 27 m、下游 8 m。**
+
+<img src="./Dam_Seepage_LLM_PINN/data/outputs/pinn_seepage_result.png" width="100%" alt="另一算例保存的渗流场输出，上游水位 27 米、下游水位 8 米。">
+
+两张图来自不同算例，不构成一次配对实验。本次 README 更新没有重新训练或验证这些数值结果。
+
+</details>
 
 ## 使用流程
 
